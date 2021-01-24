@@ -14,8 +14,12 @@ def ConsoleCheck(url, merchant_name):
         driver = webdriver.Chrome(executable_path='C:\Program Files\ChromeDriver\chromedriver.exe', options=options)
         driver.get(url)
     except Exception as e:
-        print(f"url {url} not available for {merchant_name}")
-        print(f"error: {str(e)}")
+        try:
+            driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver.exe', options=options)
+            driver.get(url)
+        except Exception as e:
+            print(f"url {url} not available for {merchant_name}")
+            print(f"error: {str(e)}")
     try:
         driver.find_element_by_name('buy-now-button')
         print(f"Available to buy from {merchant_name} at {url} ")
