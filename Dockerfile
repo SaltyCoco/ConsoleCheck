@@ -17,6 +17,14 @@ ENV DISPLAY=:99
 # upgrade pip
 RUN pip install --upgrade pip
 
-# install selenium
-RUN pip install selenium
+ENV PYHTONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
+WORKDIR /code
+
+COPY ./requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
+
+COPY . /code/
+
+CMD ["python", "/code/main.py"]
