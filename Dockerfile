@@ -28,3 +28,6 @@ RUN pip install -r /requirements.txt
 COPY . /code/
 
 CMD ["python", "/code/main.py"]
+
+EXPOSE 5000
+CMD ["python", "code/FlaskApp.py"]
