@@ -11,7 +11,7 @@ def AmazonConsoleCheck(url, merchant_name, executable_path):
     options.add_argument('--no-sandbox')
 
     try:
-        driver = webdriver.Chrome(executable_path=execurtable_path, options=options)
+        driver = webdriver.Chrome(executable_path=executable_path, options=options)
     except Exception as e:
         print("driver not available")
         print(f"Error: {str(e)}")
@@ -35,9 +35,16 @@ def AmazonConsoleCheck(url, merchant_name, executable_path):
     return
 
 def WalmartConsoleCheck(url, merchant_name, executable_path):
-        try:
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('ignore-certificate-errors')
+    options.add_argument('--no-sandbox')
+
+
+    try:
         driver = webdriver.Chrome(executable_path=executable_path, options=options)
-        WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.LINK_TEXT, 'some link text')))
+        driver.find_elements_by_link_text()
+        driver.WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.LINK_TEXT, 'some link text')))
     except Exception as e:
         print("driver not available")
         print(f"Error: {str(e)}")
@@ -45,7 +52,7 @@ def WalmartConsoleCheck(url, merchant_name, executable_path):
 
 
 if __name__ == '__main__':
-    chrome_executable_path = "'/usr/local/bin/chromedriver'"
+    chrome_executable_path = '/usr/local/bin/chromedriver'
 
     amazon_url = "https://www.amazon.com/Xbox-X/dp/B08H75RTZ8/ref=sr_1_16?crid=1JXVRXKXUG4Y9&dchild=1&keywords=xbox+series+x&qid=1611521867&sprefix=xbox%2Caps%2C221&sr=8-16"
     AmazonConsoleCheck(url=amazon_url, merchant_name="amazon", executable_path=chrome_executable_path)
